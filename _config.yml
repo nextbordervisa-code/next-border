@@ -1,0 +1,13 @@
+---
+# Site settings
+name: My Site
+description: This is an example site
+
+# Jekyll theme settings
+theme: minima
+
+# Build settings
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+---
