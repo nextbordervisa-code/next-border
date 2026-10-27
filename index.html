@@ -8,16 +8,17 @@
   name="description"
   content="NextBorder provides student visa guidance, Europe job visa support, Umrah visa assistance, and SEO-friendly travel and migration content."
 >
+<link rel="canonical" href="https://nextbordervisa-code.github.io/next-border/">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta property="og:title" content="NextBorder | Student Visa, Work Permit, Umrah, and Cheap Air Ticket in Bangladesh">
 <meta property="og:description" content="NextBorder supports student visa, Europe work permit, Umrah visa, and cheap air ticket support from Bangladesh.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://nextborder.netlify.app/">
-<meta property="og:image" content="https://nextborder.netlify.app/assets/nextborder-og.svg">
+<meta property="og:url" content="https://nextbordervisa-code.github.io/next-border/">
+<meta property="og:image" content="https://nextbordervisa-code.github.io/next-border/assets/nextborder-og.svg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NextBorder | Student Visa, Work Permit, Umrah, and Cheap Air Ticket in Bangladesh">
 <meta name="twitter:description" content="NextBorder supports student visa, Europe work permit, Umrah visa, and cheap air ticket support from Bangladesh.">
-<meta name="twitter:image" content="https://nextborder.netlify.app/assets/nextborder-og.svg">
+<meta name="twitter:image" content="https://nextbordervisa-code.github.io/next-border/assets/nextborder-og.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -30,9 +31,9 @@
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Next Border Consulting Firm",
-  "url": "https://nextborder.netlify.app/",
-  "logo": "https://nextborder.netlify.app/assets/nextborder-logo.svg",
-  "image": "https://nextborder.netlify.app/assets/nextborder-og.svg",
+  "url": "https://nextbordervisa-code.github.io/next-border/",
+  "logo": "https://nextbordervisa-code.github.io/next-border/assets/nextborder-logo.svg",
+  "image": "https://nextbordervisa-code.github.io/next-border/assets/nextborder-og.svg",
   "telephone": "+8801888057888",
   "email": "nextborder.visa@gmail.com",
   "sameAs": ["https://wa.me/8801989070666"],
@@ -84,8 +85,8 @@
   <div class="floating-dock reveal reveal-delay-1" aria-label="Quick navigation">
     <a class="floating-tab floating-tab-active" href="index.html">Home</a>
     <a class="floating-tab" href="student-visa.html">Student Visa</a>
-    <a class="floating-tab" href="europe-job-visa.html">Work Permit</a>
-    <a class="floating-tab" href="umrah-visa.html">Umrah</a>
+    <a class="floating-tab" href="europe-job-visa.html">Europe Job Visa</a>
+    <a class="floating-tab" href="umrah-visa.html">Umrah Visa</a>
     <a class="floating-tab" href="#ask-ai">AI Chat</a>
     <a class="floating-tab" href="contact.html">Contact</a>
   </div>
@@ -119,12 +120,12 @@
 
       <div class="hero-panel logo-panel reveal reveal-delay-1">
         <div class="hero-floating-stack" aria-hidden="true">
-          <span class="hero-floating-card">Violet Amber</span>
+          <span class="hero-floating-card">Student First</span>
           <span class="hero-floating-card hero-floating-card-bright">Founder Led</span>
           <span class="hero-floating-card">Global Reach</span>
         </div>
         <img class="hero-logo" src="assets/nextborder-logo.svg" alt="NextBorder logo presentation">
-        <div class="floating-tag">AI lead collection + floating service tabs</div>
+        <div class="floating-tag">Visa guidance and enquiry support</div>
       </div>
     </section>
 
@@ -303,8 +304,8 @@
 
     <section class="section cta-section reveal reveal-delay-3">
       <div class="cta-card">
-        <p class="eyebrow">Ready to publish the new structure?</p>
-        <h2>Preview the service pages now, then we can add your real contact details and live inquiry channels.</h2>
+        <p class="eyebrow">Your next step starts here</p>
+        <h2>Explore our services and contact the NextBorder team for guidance.</h2>
         <div class="hero-actions hero-actions-center">
           <a class="button button-primary" href="blog.html">Open SEO Blog</a>
           <a class="button button-secondary" href="contact.html">Edit Contact Page Next</a>
@@ -396,7 +397,7 @@
     if (!profile.question) {
       return "Almost done. Drop your main question so the team can prepare the right response.";
     }
-    return "Perfect. I have your core details. Press Send to AI Agent and we will come back to you soon.";
+    return "Your details are ready to prepare an email draft. They have not been sent or saved. Press Send to AI Agent, then press Send in your email app to submit your inquiry.";
   };
 
   const getProfile = () => ({
@@ -469,20 +470,22 @@
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const profile = getProfile();
-    const visitorMessage = profile.question || "I want help with " + (profile.service || "a visa inquiry") + ".";
-    appendBubble(visitorMessage, "assistant-bubble-user");
-
-    const summary = [
-      "Thank you" + (profile.name ? ", " + profile.name : "") + ".",
-      profile.service ? "Service: " + profile.service + "." : "",
-      profile.mobile ? "Mobile: " + profile.mobile + "." : "",
-      profile.email ? "Email: " + profile.email + "." : "",
-      profile.phone ? "Phone: " + profile.phone + "." : "",
-      "Your details are captured. We will come back to you soon."
-    ].filter(Boolean).join(" ");
-
-    appendBubble(summary, "assistant-bubble-ai");
-    await updateStatus();
+    if (!profile.name || !profile.mobile || !profile.service || !profile.question) {
+      appendBubble("Please complete your name, mobile number, service, and question before sending.", "assistant-bubble-ai");
+      return;
+    }
+    const subject = "NextBorder inquiry: " + profile.service;
+    const body = [
+      "New NextBorder website inquiry",
+      "Name: " + profile.name,
+      "Mobile: " + profile.mobile,
+      "Email: " + (profile.email || "Not provided"),
+      "Alternate phone: " + (profile.phone || "Not provided"),
+      "Service: " + profile.service,
+      "Question: " + profile.question
+    ].join("\n");
+    appendBubble("Your email app should open with the inquiry draft. Please press Send to submit it. If it does not open, email nextborder.visa@gmail.com directly.", "assistant-bubble-ai");
+    window.location.href = "mailto:nextborder.visa@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   });
 
   updateStatus();

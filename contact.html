@@ -8,16 +8,17 @@
   name="description"
   content="Request a consultation from NextBorder for student visa, Europe job visa, or Umrah visa support."
 >
+<link rel="canonical" href="https://nextbordervisa-code.github.io/next-border/contact.html">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <meta property="og:title" content="Contact NextBorder | Student Visa, Work Permit, and Umrah Support">
 <meta property="og:description" content="Contact NextBorder through phone, WhatsApp, email, Narayanganj head office, or Dhaka branch.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://nextborder.netlify.app/contact.html">
-<meta property="og:image" content="https://nextborder.netlify.app/assets/nextborder-og.svg">
+<meta property="og:url" content="https://nextbordervisa-code.github.io/next-border/contact.html">
+<meta property="og:image" content="https://nextbordervisa-code.github.io/next-border/assets/nextborder-og.svg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact NextBorder | Student Visa, Work Permit, and Umrah Support">
 <meta name="twitter:description" content="Contact NextBorder through phone, WhatsApp, email, Narayanganj head office, or Dhaka branch.">
-<meta name="twitter:image" content="https://nextborder.netlify.app/assets/nextborder-og.svg">
+<meta name="twitter:image" content="https://nextbordervisa-code.github.io/next-border/assets/nextborder-og.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -30,9 +31,9 @@
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Next Border Consulting Firm",
-  "url": "https://nextborder.netlify.app/",
-  "logo": "https://nextborder.netlify.app/assets/nextborder-logo.svg",
-  "image": "https://nextborder.netlify.app/assets/nextborder-og.svg",
+  "url": "https://nextbordervisa-code.github.io/next-border/",
+  "logo": "https://nextbordervisa-code.github.io/next-border/assets/nextborder-logo.svg",
+  "image": "https://nextbordervisa-code.github.io/next-border/assets/nextborder-og.svg",
   "telephone": "+8801888057888",
   "email": "nextborder.visa@gmail.com",
   "sameAs": ["https://wa.me/8801989070666"],
@@ -75,8 +76,8 @@
   <div class="floating-dock reveal reveal-delay-1" aria-label="Quick navigation">
     <a class="floating-tab" href="index.html">Home</a>
     <a class="floating-tab" href="student-visa.html">Student Visa</a>
-    <a class="floating-tab" href="europe-job-visa.html">Work Permit</a>
-    <a class="floating-tab" href="umrah-visa.html">Umrah</a>
+    <a class="floating-tab" href="europe-job-visa.html">Europe Job Visa</a>
+    <a class="floating-tab" href="umrah-visa.html">Umrah Visa</a>
     <a class="floating-tab" href="blog.html">Blog</a>
     <a class="floating-tab floating-tab-active" href="contact.html">Contact</a>
   </div>
@@ -333,7 +334,7 @@
     if (!profile.question) {
       return "Almost done. Please write your question so we can understand your need properly.";
     }
-    return "Thank you. Your details are collected and we will come back to you soon.";
+    return "Your inquiry has not been sent. This assistant may be temporarily unavailable. Use the Contact form below to prepare an email draft, then press Send in your email app to submit it.";
   };
 
   const getProfile = () => ({
@@ -406,13 +407,41 @@
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const profile = getProfile();
-    const visitorMessage = profile.question || "I need support for " + (profile.service || "a visa inquiry") + ".";
-    appendBubble(visitorMessage, "assistant-bubble-user");
-    appendBubble("Thank you" + (profile.name ? ", " + profile.name : "") + ". Your information is collected. We will come back to you soon.", "assistant-bubble-ai");
-    await updateStatus();
+    if (!profile.name || !profile.mobile || !profile.service || !profile.question) {
+      appendBubble("Please complete your name, mobile number, service, and question before sending.", "assistant-bubble-ai");
+      return;
+    }
+    const subject = "NextBorder inquiry: " + profile.service;
+    const body = [
+      "New NextBorder website inquiry",
+      "Name: " + profile.name,
+      "Mobile: " + profile.mobile,
+      "Email: " + (profile.email || "Not provided"),
+      "Alternate phone: " + (profile.phone || "Not provided"),
+      "Service: " + profile.service,
+      "Question: " + profile.question
+    ].join("\n");
+    appendBubble("Your email app should open with the inquiry draft. Please press Send to submit it. If it does not open, email nextborder.visa@gmail.com directly.", "assistant-bubble-ai");
+    window.location.href = "mailto:nextborder.visa@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   });
 
   updateStatus();
+})();
+</script>
+
+<script>
+(() => {
+  if (!location.hostname.endsWith("github.io")) return;
+  const form = document.querySelector('form[name="nextborder-inquiry"]');
+  if (!form) return;
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    const subject = "NextBorder consultation request: " + (data.get("service") || "General inquiry");
+    const body = ["Name: " + data.get("name"), "Email: " + data.get("email"), "Service: " + data.get("service"), "Message: " + data.get("message")].join("\\n");
+    window.location.href = "mailto:nextborder.visa@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  });
 })();
 </script>
 </body>

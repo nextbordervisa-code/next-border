@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nextbordervisa-code.github.io/next-border/sitemap.xml
