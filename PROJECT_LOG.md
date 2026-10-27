@@ -28,3 +28,11 @@
 - Validation performed: fetched the exact prior file, asserted the exact expected string was present, replaced only that string, and GitHub accepted the update. Commit: `935c0d7a8c2a21f7d56ac927f5473a019755fbef`.
 - Automated/browser tests: not run. Connector access does not provide a local checkout or browser runtime in this session. Therefore JavaScript/runtime, mobile, accessibility, and real email delivery remain unverified.
 - No merge, production promotion, paid API call, secrets inspection, or Clerk migration performed.
+
+## 2026-10-27 — Read-only targeted checks after copy fix
+- Fetched 18 existing HTML files from the audit branch for targeted source-level checks (the repeated path list includes `study-in-hungary.html` twice; unique files fetched: 18).
+- SEO source check: 18 canonical-tag occurrences found across fetched HTML; no `nextborder.netlify.app` references found in those fetched documents.
+- Contact copy fix verified by re-fetching the changed `contact.html`; the clarified email-draft wording is present.
+- Relative reference scan flagged six paths from `student-visa.html`: `assets/university-of-galway-quadrangle.jpg`, `assets/student-logos/oxford.svg`, `assets/student-logos/cambridge.jpg`, `assets/student-logos/harvard.png`, `assets/student-logos/lse.png`, `assets/student-logos/denver.png`. Binary image fetches are not UTF-8 supported by the connector, so those fetch errors do not establish missing files. Asset presence remains unconfirmed by this scan; do not label them broken without a tree/HTTP check.
+- At least three inline JavaScript blocks were identified in the checked pages. No JavaScript runtime/syntax execution was available; runtime result remains unverified.
+- No browser/device tests, click tests, or real email delivery tests were run. No merge or production deployment performed.
