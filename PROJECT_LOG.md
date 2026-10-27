@@ -36,3 +36,11 @@
 - Relative reference scan flagged six paths from `student-visa.html`: `assets/university-of-galway-quadrangle.jpg`, `assets/student-logos/oxford.svg`, `assets/student-logos/cambridge.jpg`, `assets/student-logos/harvard.png`, `assets/student-logos/lse.png`, `assets/student-logos/denver.png`. Binary image fetches are not UTF-8 supported by the connector, so those fetch errors do not establish missing files. Asset presence remains unconfirmed by this scan; do not label them broken without a tree/HTTP check.
 - At least three inline JavaScript blocks were identified in the checked pages. No JavaScript runtime/syntax execution was available; runtime result remains unverified.
 - No browser/device tests, click tests, or real email delivery tests were run. No merge or production deployment performed.
+
+## 2026-10-27 — Assistant fallback wording correction
+- File changed: `contact.html`.
+- Evidence: the contact assistant has a branch that calls `/.netlify/functions/chat`; when that request fails, the fallback now clearly says the assistant may be unavailable and directs the visitor to the Contact form email-draft flow. The email draft still requires the visitor to press Send.
+- Fix: replaced one fallback string only. No layout, styles, endpoint, destination address, or secrets were changed.
+- Validation: exact old string asserted before replacement; GitHub accepted update at commit `07f7daab6d10bf64b2d13e955ab5f2216ed25d46`.
+- Tests: source-level check only. Browser/JS runtime, network request behavior, mobile/accessibility, and actual email delivery were not tested in this connector environment.
+- No merge, production promotion, paid API calls, secrets inspection, or Clerk migration performed.
