@@ -44,3 +44,20 @@
 - Validation: exact old string asserted before replacement; GitHub accepted update at commit `07f7daab6d10bf64b2d13e955ab5f2216ed25d46`.
 - Tests: source-level check only. Browser/JS runtime, network request behavior, mobile/accessibility, and actual email delivery were not tested in this connector environment.
 - No merge, production promotion, paid API calls, secrets inspection, or Clerk migration performed.
+
+## 2026-10-27 — Homepage inquiry copy correction
+- File changed: `index.html`.
+- Confirmed source issue: the homepage assistant's final fallback said “we will come back to you soon” before any email draft had been sent, creating a misleading impression that an inquiry was submitted or accepted.
+- Fix: changed that single fallback string to explicitly say details have not been sent or saved, and that the visitor must press Send in their email app.
+- Validation: fetched the file at the current branch head, asserted the exact prior string existed, replaced only that string, and GitHub accepted the update. Commit: `f5569093bd84eb14c506dd07a32af33e6c3161fd`.
+- Tests: source-level checks only; no browser, JavaScript runtime, mobile, accessibility, or actual email-sending test is available through this GitHub connector.
+- No merge, production promotion, paid API calls, secrets inspection, or Clerk migration performed.
+
+## 2026-10-27 — Targeted source/tree validation
+- Confirmed all six previously flagged `student-visa.html` asset paths exist in the recursive repository tree: university-of-galway-quadrangle.jpg; oxford.svg; cambridge.jpg; harvard.png; lse.png; denver.png.
+- Fetched `index.html`, `contact.html`, and `student-visa.html` plus `sitemap.xml` and `robots.txt` from the audit branch. The three HTML content pages each have one canonical tag; no retired `nextborder.netlify.app` host was found in these targeted files; no missing relative local href/src reference was found in this targeted subset. This is a targeted check, not a replacement for the full documented 19-page audit.
+- Confirmed `index.html` includes `id="ask-ai"`; the homepage assistant submits by opening a `mailto:` draft, while its status updater also calls `/.netlify/functions/chat` when a service/question is entered. Runtime availability of that endpoint remains unverified.
+- PR #1 metadata was refreshed. At the latest read it was open, draft, unmerged, with head SHA `e5dd8062bfce4d0c35d3cf160c1a90b96f4486cc`, and GitHub reported `mergeable: true`. An earlier read briefly returned false; this appears transient and does not establish a merge conflict. PR mergeability is GitHub's current computed metadata, not a test result.
+- Local checkout and git status: NOT RUN because no local repository path or shell checkout is exposed in this session.
+- Browser/mobile, accessibility, JavaScript execution/syntax, real form/email delivery, and live production/hosting checks: NOT RUN because no browser/runtime or deployment test capability is available here.
+- No merge or production deployment performed.
